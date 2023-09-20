@@ -5,17 +5,17 @@
 # - 변수 값 확인 용도로 많이 사용
 print("Hello Python")
 # 문자열 타입(string type)
-# - python: ''or "" -> string
+#- python: ''or "" -> string
 # - c, java: ''(char), ""(string)
 print("=" * 200)
-# 참고: escape code
-# -문법 : \(역 슬래쉬)+@
-# 예) \n: 한줄 개행, \t: 탭(8칸 공백)
+#참고: escape code
+#-문법 : \(역 슬래쉬)+@
+#예) \n: 한줄 개행, \t: 탭(8칸 공백)
 print("=" * 200)
 print("Hello \nPython")
 print("Hello \tPython")
 # 회사: 항상 신기술, 새로나온 코드 기법 사용 x
-# 3.8
+ # 3.8
 # 3.9 새로운 기법 추가!
 
 # 2. 자료형(type)
@@ -29,17 +29,17 @@ print("Hello \tPython")
 
 # 설명: 동일한 type에서 다양한 종류의 자료형을 사용하는 이유?
 # - 메모리(저장공간)를 효율적으로 사용하기 위해서!
-# - 대부분 만들어진지 오래 된 언어는 다양한 종류의 자료형 사용!
-# - 자료형은 저장 할 수 있는 크기의 범위가 지정
+#  - 대부분 만들어진지 오래 된 언어는 다양한 종류의 자료형 사용!
+#  - 자료형은 저장 할 수 있는 크기의 범위가 지정
 # - 가정: int(-10000 ~10000)
 # - 가정: short(-100~ 100)
 # - 특정 값 : 0~9-> 어떤 type을 사용하면 효율적일까요?
 
 # 3. 동적 타이핑 언어(Dynamic Typing Language)
-# - JAVA :int num =4;
+# -JAVA :int num =4;
 # - python: num =4(Type 지정 x)
-# - 코드가 실행될 때 자동으로 Type을 지정
-# - type() 함수: ()안의 값을 type을 확인할 때 사용
+# -코드가 실행될 때 자동으로 Type을 지정
+# -type() 함수: ()안의 값을 type을 확인할 때 사용
 print("="*200)
 print(type("ABC"))
 print(type(3.14))
@@ -104,67 +104,7 @@ print(num) # 출력: 10
 #  * num: "num" 변수 생성
 # * 대입연산자(=): 우측의 값을 좌측에 저장
 # * 동등연산자(==): Equal
-# * 초기화: 초기 변수를 생성하면 쓰레기 파일들이 존재
-# 변수에 값을 대입하면 공간이 초기화 되고 값만 저장!
-# name(변수명), =(대입연산자,), "cherry"(값)
-name = "cherry"
+# *  초기화: 초기 변수를 생성하면 쓰레기 파일들이 존재
+# 변수에 값을 대입한면 공간이 초기화 되고 값만 저장!
 
-# 7. 명명규칙(Naming Rule)
-# * 변수, 함수, 클래스 등의 사용자 저으이 이르멩 사용
-# * 명확하고 알아보기 쉽게!!
-#
-# 1. 영문 대소문자, 숫자, 특수문자(_)만 사용
-# 2. 숫자로 시작할 수 없음
-# abc1(o), 1abc(x)
-# 3. 영어 대소문자 구별
-# abc ABC Abc ABc abC 모두 다른 변수로 인식
-# 4. 예약어 사용 불가
-# 예약어: Python에서 미리 선점하여 사용중인 키워드
-# ex) print for while
-#  if else class and return import def pass
-
-# 8.  Naming Method
-# - 변수, 함수, 클래스 등의 사용자 정의 이름에
-# 사용하는 기법
-# - 프로그래밍 언어별로 사용하는 Naming Method 가 다름
-# 1. snake_case: 소문자만 사용, 합성어는 _사용
-# ex) chosun_student_name
-# 2. camel case: 첫글자 소문자, 합성어 첫글자 대문자
-# ex) chosunStudentName
-#  3. PascalCase: 첫글자 대문자, 합서어 첫글자 대문자
-# ex) ChosunStudentName
-
-
-
-#            변수         함수          클래스
-# JAVA, C   camel case  camel case()  PascalCase                     PascalCase
-# Python    snake_case snake_case()  PascalCase
-
-# 9. 동적 출력
-print("="*200)
-student_num = 20233146
-student_name = "Cherry"
-# 출력 예: "조선대학교 20233146,  cherry 입니다. "
-print("조선대학교 20233146,  cherry 입니다.") #하드코딩 지양
-# 1. format() -old
-print("조선대학교 {},  {} 입니다.".format(student_num, student_name))
-# 2. f-string
-print(f"조선대학교 {student_num},  {student_name} 입니다.")
-
-# 10. 간단한 사칙연산
-# +: 더하기
-# -: 빼기
-# *: 곱하기
-# ** or ^: 제곱 ex) 3^2
-# 5/2: 나누기  2.5
-# 5%2: 나누기(나머지) 1
-# 5//2: 나누기(몫) 2
-
-# QUIZ
-# num=9
-# num -1
-#num +2
-print(num)  #9
-#
-#
 
