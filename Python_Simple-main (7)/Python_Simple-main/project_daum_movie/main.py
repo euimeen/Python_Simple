@@ -15,6 +15,8 @@
 #   - URL: https://sites.google.com/chromium.org/driver/
 #  2.실시간(코드) 다운로드
 
+from db.movie_dao import add_review
+
 from datetime import datetime, timedelta
 import math
 import re
@@ -32,7 +34,7 @@ options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                           options=options)
 # 2.URL 접속
-url = "https://movie.daum.net/moviedb/grade?movieId=169137"
+url = "https://movie.daum.net/moviedb/grade?movieId=146084"
 driver.get(url)
 time.sleep(2)
 
@@ -94,19 +96,40 @@ for item in review_list:
     review_writer = item.select("a.link_nick > span")[1].get_text()  # [댓글 작성자, 작성자, 댓글 모아보기]
     print(f"  - 작성자: {review_writer}")
 
+
+    # 다음 영화 리뷰 날짜 표시방법
+    # 1. "조금전"
+    # 2. "?분전"
+    # 3. "?시간전"
+    # 4. "2023. 11. 29. 16:14"
     review_date = item.select("span.txt_date")[0].get_text()
-    # 24시간 이내에 작성 된 리뷰의 날짜 → 24시간전, 3시간전 → 다음영화날짜(2023. 11. 17. 2:12)
-    # 1) 24시간전, 17시간전과 같은 날짜 찾기
-    if len(review_date) < 7:
-        # 2) "17시간" → 숫자만 추출 17
-        reg_hour = int(re.sub(r"[^~0-9]", "", review_date))
-        # 3) 등록일자 = 현재시간 - 17
-        # print(f"현재시간: {datetime.now()}")  # 년월일시분초나노초
-        review_date = datetime.now() - timedelta(hours=reg_hour)
-        # print(f"등록시간: {review_date}")
-        # 4) 계산된 등록일자 날짜 포맷 변경(다음 영화 리뷰 날짜 포맷)
+
+    if review_date == "조금전":
+        review_date = datetime.now() - timedelta(seconds=59)
         review_date = review_date.strftime("%Y. %m. %d. %H:%M")
+    elif review_date[-2:] == "분전":
+        reg_minute = int(re.sub(r"[^~0-9]", "", review_date))
+        review_date = datetime.now() - timedelta(minutes=reg_minute)
+        review_date = review_date.strftime("%Y. %m. %d. %H:%M")
+        # 1분전 ~ 59분전 ->"분전"
+    elif review_date[-3:] == "시간전":
+        reg_hour = int(re.sub(r"[^~0-9]", "", review_date))
+        review_date = datetime.now() - timedelta(hours=reg_hour)
+        review_date = review_date.strftime("%Y. %m. %d. %H:%M")
+        # 1시간전~23시간 전 -> "시간전"
+
     print(f"  - 날짜: {review_date}")
+
+    # MariaDB 저장(제목, 리뷰, 평점, 작성자, 작성일자)
+    data = {
+        "title": movie_title,
+        "review": review_content,
+        "score": review_score,
+        "writer": review_writer,
+        "reg_date": review_date
+        }
+    add_review(data)
+
 
 
 
